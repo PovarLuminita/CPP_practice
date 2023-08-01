@@ -1,57 +1,73 @@
 #include <stdio.h>
-
 #include <iostream>
 #include <string>
+#include <cstdlib>
 
 void printOddOrEven(int number)
 {
-	if (number % 2 == 0)
-	{
-		printf("EVEN\n");
-	}
-	else
-	{
-		printf("ODD\n");
-	}
+    if (number % 2 == 0)
+    {
+        printf("EVEN\n");
+    }
+    else
+    {
+        printf("ODD\n");
+    }
 }
+
+
 
 int main(int argc, char *argv[])
 {
-	int number = -13;
+    int number = -13;
 
-	// What is this program expected to do?
-	// - Shows whether an argument is an ODD or EVEN number.
-	// How to launch it?
-	// - Execute the binary and pass a parameter to it?
-	// - E.g. Open CMD in bin/Debug or bin/Release
-	//		  02_odd_even.exe 1		=> Output: ODD
-	//		  02_odd_even.exe 2		=> Output: EVEN
-	//		  02_odd_even.exe 		=> Output: No program arguments found.
-	//		  02_odd_even.exe ABC   => Undefined output (do whatever).
-	//		
+    // What is this program expected to do?
+    // - Shows whether an argument is an ODD or EVEN number.
+    // How to launch it?
+    // - Execute the binary and pass a parameter to it?
+    // - E.g. Open CMD in bin/Debug or bin/Release
+    //		  02_odd_even.exe 1		=> Output: ODD
+    //		  02_odd_even.exe 2		=> Output: EVEN
+    //		  02_odd_even.exe 		=> Output: No program arguments found.
+    //		  02_odd_even.exe ABC   => Undefined output (do whatever).
+    //
 
-	// Make sure there are some program arguments available.
-	if (argc <= 1)
-	{
-		printf("No program arguments found.\n");
-	}
-	
-	// TODO(Gusti): i don't know why this doesn't work, but someone please FIX it.
-	// --------------- start
+    // Make sure there are some program arguments available.
+    if (argc <= 1)
+    {
+        printf("No program arguments found.\n");
+    }
 
-	// Get the first argument
-	std::string argumentAsString = argv[1];
-	const char* argumentAsCharArray = argumentAsString.c_str();
+    // TODO(Gusti): i don't know why this doesn't work, but someone please FIX it.
+    // --------------- start
 
-	//number = argv[1]; // No
-	//should use atoi?
-	// or std::stoi?
+    // Get the first argument
+    std::string argumentAsString = argv[1];
+    //const char* argumentAsCharArray = argumentAsString.c_str();
 
-	std::cout << argumentAsString << std::endl; // i think this should be removed
+    //number = argv[1]; // No
+    //should use atoi?
+    // or std::stoi?
 
-	// --------------- stop
+    //std::cout << argumentAsString << std::endl; // i think this should be removed
 
-	printOddOrEven(number);
+    // --------------- stop
 
-	return 0;
-}
+    //printOddOrEven(number);
+   // Convert the argument to an integer
+    char* endPtr;
+    number = strtol(argumentAsString.c_str(), &endPtr, 10);
+
+    // Check if conversion was successful
+    if (*endPtr == '\0')
+    {
+        printOddOrEven(number);
+    }
+    else
+    {
+        std::cout << "Undefined output (do whatever).\n";
+    }
+
+
+        return 0;
+    }
