@@ -1,10 +1,40 @@
 #include <iostream>
+#include <sstream>
+#include <math.h>
 
 bool isArmstrongNumber(int number)
 {
 	// TODO: implement some functionality to see if this number is an armstrong number
 
-	return false;
+	int i = 0;
+	int suma = 0;
+	int cifra = 0;
+	int number_copy = number; // fac o copie pentru a pastra number intact
+	int number_copy1 = number;
+
+	while (number_copy > 0)
+	{
+		number_copy /= 10;
+		i++; // ca sa vedem puterea
+	}
+
+	while (number_copy1 > 0)
+	{
+		cifra = number_copy1 % 10; // ca sa luam ultima cifra din numar
+
+		suma = suma + pow(cifra, i); // calcult de verificat pt armstrong
+
+		number_copy1 /= 10;
+	}
+
+	if (number == suma) // verifica daca numarul initial este egal cu suma calculata
+	{
+		return true;
+	}
+	else
+	{
+		return false;
+	}
 }
 
 void printIsArmstrong(int number)
@@ -19,26 +49,10 @@ void printIsArmstrong(int number)
 	}
 }
 
-int main(int argc, char *argv[])
+int main(int argc, char* argv[])
 {
-	// What is this program expected to do?
-	// - Shows whether an argument is an armstrong number.
-	// (what?)
-	// -	An Armstrong number is a number that is equal to the sum of cubes of its digits.
-	//		For example 0, 1, 153, 370, 371 and 407 are the Armstrong numbers.
-	//		Let's try to understand why 153 is an Armstrong number:
-	//			1^3 + 5^3 + 3^3 = 1 + 125 + 27 = 153
-	//
-	// How to launch it?
-	// - Execute the binary and pass a parameter to it?
-	// - E.g. Open CMD in bin/Debug or bin/Release
-	//		  03_armstrong.exe 1		=> Output: Armstrong
-	//		  03_armstrong.exe 2		=> Output: NOT Armstrong
-	//		  03_armstrong.exe 			=> Output: No program arguments found.
-	//		  03_armstrong.exe ABC		=> Undefined output (do whatever).
-	//		  03_armstrong.exe 153		=> Output: Armstrong
-	//		  03_armstrong.exe 154		=> Output: NOT Armstrong
-	//
+	//		  ./03_armstrong.exe 153		=> Output: Armstrong
+	//		  ./03_armstrong.exe 154		=> Output: NOT Armstrong
 
 	// Make sure there are some program arguments available.
 	if (argc <= 1)
@@ -48,11 +62,17 @@ int main(int argc, char *argv[])
 	}
 
 	int readNumber = 0;
+
 	// Get the first argument
 	std::string argumentAsString = argv[1];
-	
-	// TODO: read number / cast to integer
 
-	printIsArmstrong(readNumber);
+
+	// TODO: read number / cast to integer
+	const char* argumentAsCharArray = argumentAsString.c_str();
+
+	int nr = std::stoi(argumentAsString); // converteste din string in int
+
+	printIsArmstrong(nr);
+	//printIsArmstrong(readNumber);
 	return 0;
 }
