@@ -2,6 +2,8 @@
 #include <string>
 #include <vector>
 
+
+using namespace std;
 /**
 	Define a simple matrix.
 */
@@ -10,6 +12,7 @@ class Matrix
 private:
 	size_t column_count;
 	size_t line_count;
+	vector<vector<char>> matrice;
 
 	// TODO: store the data
 	// hints: you can use std::string, std::vectors + string, char**, vector<vector<char>>, etc
@@ -17,12 +20,24 @@ public:
 	Matrix(size_t numColumnsX, size_t numLinesY)
 		// TODO: add functionality
 	{
+		column_count = numColumnsX;
+		line_count = numLinesY;
+
+		matrice.assign(line_count, vector<char>(column_count));
 		// TODO: add functionality
 	}
 
 	// Set an entire line
 	void setLine(size_t line_number, const std::string& data)
 	{
+		matrice[line_number].clear();
+
+		for (int i = 0; data.c_str()[i]; i++)
+		{
+			matrice[line_number].push_back(data.c_str()[i]);
+
+		}
+
 	}
 
 	//OPTIONAL
@@ -52,15 +67,26 @@ public:
 
 		 Height
 	*/
+
+
 	void setCellXY(size_t x, size_t y, char cell_content)
 	{
+		if (x < 0 || x >= column_count) return;
+		if (y < 0 || y >= line_count) return;
 		// TODO: add functionality
+		matrice[y][x] = cell_content;
 	}
 
 	void print()
 	{
 		// print all lines and columns
 		// TODO: add functionality
+		for (auto row : matrice) {
+			for (auto it : row)
+				cout << it;
+			cout << endl;
+		}
+		cout << endl;
 	}
 };
 

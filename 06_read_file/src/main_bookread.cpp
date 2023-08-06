@@ -1,6 +1,9 @@
 ﻿#include <iostream>
 #include <string>
 #include <vector>
+#include <fstream>
+
+using namespace std;
 
 /**
 	Define a simple book.
@@ -10,6 +13,12 @@ class Book
 public:
 	std::string name;
 	std::string authors;
+
+	Book(string nume, string autor) //constructor
+	{
+		name = nume;
+		authors = autor;
+	}
 
 	void print()
 	{
@@ -35,6 +44,29 @@ std::vector<Book> readBooksFromTextFile(const std::string& file_name)
 {
 	std::vector<Book> results;
 	// TODO: BEGIN read the file -------------------------------------
+	CSimpleIniA ini;
+	ini.LoadFile(file_name.c_str()); //converteste din string in char
+
+	const char* count_s = ini.GetValue("books", "count", """");
+
+	int count = stoi(count_s);
+
+	int i;
+	for (i = 1; i <= count; i++)
+	{
+		stringstream ss;
+		ss << "book" << i;
+
+		string s_name(ss.str()); //copiez ce am in stream
+
+		const char* carte = ini.GetValue(s_name.c_str(), "name", """");
+		const char* autori = ini.GetValue(s_name.c_str(), "autori", """");
+
+		//carte de tip book
+		Book book1 = Book(carte, autori);
+		results.push_back(book1);
+
+	}
 
 
 	// E.g. Book myBook;
@@ -47,14 +79,13 @@ std::vector<Book> readBooksFromTextFile(const std::string& file_name)
 
 int main()
 {
-	// Read a collection of books from a file.
-	// Simple examples can be found everywhere.
-	// E.g. https://stackoverflow.com/questions/7868936/read-file-line-by-line-using-ifstream-in-c
+	// Read a collection of books from an INI file.
+	// Using the SimpleINI C++ Lib: https://github.com/brofield/simpleini
 
 	// Read the data
-	std::string input_data("../../data/ermahgerd_berks.txt");
+	std::string input_data(".. / .. / data / ermahgerd_berks.ini");
 	std::cout << "Reading the data from " << input_data << std::endl;
-	std::vector<Book> books_from_file = readBooksFromTextFile(input_data);
+	std::vector<Book> books_from_file = readBooksFromIniFile(input_data);
 
 	// Print the data
 	std::cout << "Here are all the books found in the data file..." << std::endl;
