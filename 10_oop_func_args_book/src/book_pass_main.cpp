@@ -1,9 +1,6 @@
 ﻿// Includes
-
 // Own header
-
 // C system headers
-
 // C++ system headers
 #include <iostream>
 #include <vector>

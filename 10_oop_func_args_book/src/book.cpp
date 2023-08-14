@@ -1,18 +1,13 @@
 // Includes
-
 // Own header
 #include "book.h"
-
 // C system headers
-
 // C++ system headers
 #include <chrono>
 #include <iostream>
 #include <sstream>
 #include <thread>
-
 // other libs
-
 // other headers in this project
 // none
 
