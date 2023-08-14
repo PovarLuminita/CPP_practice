@@ -1,5 +1,4 @@
 #include "book.h"
-
 #include <iostream>
 
 Book::Book()

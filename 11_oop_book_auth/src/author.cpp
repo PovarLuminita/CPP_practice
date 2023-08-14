@@ -1,5 +1,6 @@
 #include "author.h"
 
+
 int Author::obj_counter = 0;
 
 Author::Author(const std::string& name)
